@@ -84,10 +84,9 @@ export default function StudentPortal() {
     setScannedContent(decodedText);
     await stopScanning();
 
-    // Verify QR code and mark attendance
-    // @ts-ignore - types will update after migration
-    const { data: qrSession, error: qrError } = await (supabase
-      .from("qr_sessions") as any)
+    // Verify QR code and mark attendance - types will update after migration
+    const { data: qrSession, error: qrError } = await (supabase as any)
+      .from("qr_sessions")
       .select("*")
       .eq("qr_data", decodedText)
       .single();
@@ -106,13 +105,10 @@ export default function StudentPortal() {
       return;
     }
 
-    // Mark attendance
-    // @ts-ignore - types will update after migration
-    const { error: attendanceError } = await (supabase.from("attendance") as any).insert({
+    // Mark attendance - types will update after migration
+    const { error: attendanceError } = await (supabase as any).from("attendance").insert({
       student_id: session?.user.id,
-      // @ts-ignore
       qr_session_id: qrSession.id,
-      // @ts-ignore
       class_id: qrSession.class_id,
     });
 

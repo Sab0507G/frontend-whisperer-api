@@ -61,15 +61,15 @@ export default function TeacherPortal() {
   }, [timeLeft, qrData]);
 
   const fetchClasses = async () => {
-    // @ts-ignore - types will update after migration
-    const { data } = await supabase.from("classes").select("*") as any;
+    // types will update after migration
+    const { data } = await (supabase as any).from("classes").select("*");
     if (data) setClasses(data);
   };
 
   const fetchAttendance = async () => {
-    // @ts-ignore - types will update after migration
-    const { data } = await (supabase
-      .from("attendance") as any)
+    // types will update after migration
+    const { data } = await (supabase as any)
+      .from("attendance")
       .select(`
         *,
         profiles:student_id(full_name, roll_number),
@@ -90,8 +90,8 @@ export default function TeacherPortal() {
     const qrDataString = `${selectedClass}_${timestamp}`;
     const expiresAt = new Date(timestamp + 60000).toISOString();
 
-    // @ts-ignore - types will update after migration
-    const { error } = await (supabase.from("qr_sessions") as any).insert({
+    // types will update after migration
+    const { error } = await (supabase as any).from("qr_sessions").insert({
       class_id: selectedClass,
       teacher_id: session?.user.id,
       qr_data: qrDataString,

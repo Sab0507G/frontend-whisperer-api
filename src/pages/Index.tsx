@@ -41,9 +41,9 @@ const Index = () => {
   }, [session]);
 
   const fetchUserRole = async (userId: string) => {
-    // @ts-ignore - types will update after migration
-    const { data } = await (supabase
-      .from("user_roles") as any)
+    // types will update after migration
+    const { data } = await (supabase as any)
+      .from("user_roles")
       .select("role")
       .eq("user_id", userId)
       .single();

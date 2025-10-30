@@ -89,10 +89,9 @@ export default function Auth() {
       if (error) throw error;
 
       if (data.user) {
-        // Insert user role
-        // @ts-ignore - types will update after migration
-        const { error: roleError } = await (supabase
-          .from("user_roles") as any)
+        // Insert user role - types will update after migration
+        const { error: roleError } = await (supabase as any)
+          .from("user_roles")
           .insert({ user_id: data.user.id, role });
 
         if (roleError) {
