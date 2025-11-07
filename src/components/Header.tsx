@@ -60,16 +60,28 @@ export const Header = () => {
           </Link>
           
           {userRole === "student" && (
-            <Link
-              to="/student"
-              className={`text-sm font-medium transition-colors hover:text-primary-foreground ${
-                isActive("/student")
-                  ? "text-primary-foreground underline"
-                  : "text-primary-foreground/80"
-              }`}
-            >
-              Student Portal
-            </Link>
+            <>
+              <Link
+                to="/student"
+                className={`text-sm font-medium transition-colors hover:text-primary-foreground ${
+                  isActive("/student")
+                    ? "text-primary-foreground underline"
+                    : "text-primary-foreground/80"
+                }`}
+              >
+                Scan QR
+              </Link>
+              <Link
+                to="/student/history"
+                className={`text-sm font-medium transition-colors hover:text-primary-foreground ${
+                  isActive("/student/history")
+                    ? "text-primary-foreground underline"
+                    : "text-primary-foreground/80"
+                }`}
+              >
+                My Attendance
+              </Link>
+            </>
           )}
           
           {userRole === "teacher" && (
