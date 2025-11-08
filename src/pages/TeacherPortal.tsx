@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -215,8 +215,15 @@ export default function TeacherPortal() {
                 </TableHeader>
                 <TableBody>
                   {attendance.map((record) => (
-                    <TableRow key={record.id}>
-                      <TableCell>{record.profiles?.full_name || "N/A"}</TableCell>
+                    <TableRow key={record.id} className="cursor-pointer hover:bg-muted/50">
+                      <TableCell>
+                        <Link 
+                          to={`/teacher/student/${record.student_id}`}
+                          className="text-primary hover:underline"
+                        >
+                          {record.profiles?.full_name || "N/A"}
+                        </Link>
+                      </TableCell>
                       <TableCell>{record.profiles?.roll_number || "N/A"}</TableCell>
                       <TableCell>{record.classes?.name || "N/A"}</TableCell>
                       <TableCell>
